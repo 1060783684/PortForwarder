@@ -7,7 +7,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import java.net.InetSocketAddress;
 
-public class PortForwarderClient {
+public class PortForwarderClientFactory {
 
     public static IoSession createClientAndGetSession(String host,int port){
         IoConnector connector = new NioSocketConnector();
