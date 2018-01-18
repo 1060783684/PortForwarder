@@ -1,11 +1,10 @@
 package handler;
 
-import client.PortForwarderClient;
+import client.PortForwarderClientFactory;
 import connection.ConnectionManager;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class PortForwardServerHandler extends IoHandlerAdapter {
     private String serverHost;
@@ -22,7 +21,7 @@ public class PortForwardServerHandler extends IoHandlerAdapter {
 
     @Override
     public void sessionOpened(IoSession session) throws Exception {
-        IoSession serverSession = PortForwarderClient.createClientAndGetSession(serverHost,port);
+        IoSession serverSession = PortForwarderClientFactory.createClientAndGetSession(serverHost,port);
         if(serverSession == null){
             session.closeNow();
             return;
@@ -37,7 +36,7 @@ public class PortForwardServerHandler extends IoHandlerAdapter {
         if(cToSConnections.containsKey(session)){
             IoSession serverSession = cToSConnections.get(session);
             if(serverSession == null){
-                serverSession = PortForwarderClient.createClientAndGetSession(serverHost,port);
+                serverSession = PortForwarderClientFactory.createClientAndGetSession(serverHost,port);
                 if(serverSession == null){
                     session.closeNow();
                     return;
