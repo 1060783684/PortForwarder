@@ -7,6 +7,10 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import java.net.InetSocketAddress;
 
+/**
+ * 端口转发器用于连接远程服务器的Client创建者
+ * @author Worry
+ */
 public class PortForwarderClientFactory {
 
     public static IoSession createClientAndGetSession(String host,int port){
